@@ -86,12 +86,12 @@ You can use MakeGIF in two modes: Interactive and Argument mode.
 
 - Ensure `ffmpeg` and `gifsicle` are correctly installed.
 - Check the syntax and format of your command if encountering errors.
-- For more help, [open an issue](link-to-your-github-issues-page) on GitHub.
+- For more help, [open an issue](https://github.com/nathan-kennedy/makegif/issues) on GitHub.
 
 ## License
 
-[MIT License](link-to-your-license-file)
+[MIT License](https://github.com/nathan-kennedy/makegif/blob/master/LICENSE)
 
 ## Contributions
 
-Contributions are welcome! Please read our [Contributing Guidelines](link-to-your-contributing-guidelines) for more information.
+Contributions are welcome!
