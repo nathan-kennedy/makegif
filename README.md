@@ -60,8 +60,8 @@ You can use MakeGIF in two modes: Interactive and Argument mode.
 ### Parameters
 
 - `source_video`: Path to the source video file.
-- `start_time`: Start time of the GIF in the format hh:mm:ss. You don't need to follow this strictly; e.g. inputting '10' will work fine and be interpretted as 00:00:10, "1:10" will also work and be interpretted as 00:01:10.
-- `duration`: Duration of the GIF in the format hh:mm:ss. You don't need to follow this strictly; e.g. inputting '10' will work fine and be interpretted as 00:00:10, "1:10" will also work and be interpretted as 00:01:10
+- `start_time`: Start time of the GIF in the format hh:mm:ss. You don't need to follow this strictly; e.g. inputting '10' will work fine and be interpreted as 00:00:10, "1:10" will also work and be interpreted as 00:01:10.
+- `duration`: Duration of the GIF in the format hh:mm:ss. You don't need to follow this strictly; e.g. inputting '10' will work fine and be interpreted as 00:00:10, "1:10" will also work and be interpreted as 00:01:10
 - `output_gif`: Name of the output GIF file.
 - `quality`: Quality of the GIF (high/low).
 - `width`: Width of the output GIF (default: 640).
