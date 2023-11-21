@@ -21,13 +21,15 @@ brew install ffmpeg gifsicle
 ## Installation
 
 1. Download the `makegif.sh` script from this repository.
-2. Make the script executable:
+2. Source the script inside your .zshrc (I source mine in a separate file for functions - they essentially act just like aliases and are called the same way too).
+
+3. Optionally, make the script executable:
 
    ```bash
    chmod +x makegif.sh
    ```
 
-3. Optionally, move the script to a directory in your PATH or create an alias for easy access.
+4. Move the script to a directory in your PATH or create an alias for easy access.
 
    - Moving to a directory in your PATH:
 
