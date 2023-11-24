@@ -1,6 +1,6 @@
 # MakeGIF
 
-MakeGIF is a simple yet powerful shell script for creating optimized GIFs from video files. It leverages the power of `ffmpeg` and `gifsicle` to provide high-quality GIFs with customization options such as start time, duration, quality, and more. Leave parameters empty to start interactive mode and have the program prompt you for the parameters line-by-line for ease of use.
+MakeGIF is a simple yet powerful shell script for creating optimized GIFs from video files. It leverages the power of `ffmpeg` and `gifsicle` to provide high-quality GIFs with customization options such as start time, duration, quality, and more. Leave the parameters empty to start interactive mode and have the program prompt you for the parameters line-by-line for ease of use.
 
 ## Features
 
