@@ -1,5 +1,22 @@
 #!/bin/bash
 
+# Function to clean up temporary files
+cleanup() {
+    rm -f "$temp_gif" "$palette"
+}
+
+# Function to check dependencies
+check_dependencies() {
+    local missing_deps=0
+    for dep in ffmpeg gifsicle; do
+        if ! command -v $dep &> /dev/null; then
+            echo "Error: $dep is not installed."
+            missing_deps=$((missing_deps+1))
+        fi
+    done
+    return $missing_deps
+}
+
 create_gif() {
     local source_video=$1
     local start_time=$2
@@ -9,6 +26,8 @@ create_gif() {
     local width=$6
     local fps=$7
     local num_colors=$8
+
+    trap cleanup EXIT
 
     if [[ "$source_video" == "~/"* ]]; then
         source_video="$HOME/${source_video:2}"
@@ -44,7 +63,13 @@ create_gif() {
 }
 
 makegif() {
-    local source_video start_time duration output_gif quality width fps num_colors
+
+    # Check for required dependencies
+    if ! check_dependencies; then
+        return 1
+    fi
+
+    #local source_video start_time duration output_gif quality width fps num_colors
 
     if [ $# -eq 0 ]; then
         # Interactive Mode
@@ -96,4 +121,3 @@ makegif() {
         return 1
     fi
 }
-
