@@ -52,6 +52,9 @@ You can use MakeGIF in two modes: Interactive and Argument mode.
 - `remove_black_bars`: Yes/no boolean dictates whether or not the script attempts to
   automatically remove the black bars from top and bottom of video.
 
+- **Cropping the GIF square**: Needs to be run as a separate command after creating
+your GIF because the function was causing bugs with how it interacted with the black
+bar removal.
   ```bash
   squaregif <original_gif_name> <output_gif_name> [left \| right \| center \| top
   \|bottom]
@@ -73,9 +76,9 @@ You can use MakeGIF in two modes: Interactive and Argument mode.
 
 3. Making the GIF square
 
-  ```bash
-  squaregif "uncroppedgif.gif" "croppedgif.gif" center 
-  ```
+    ```bash
+    squaregif "uncroppedgif.gif" "croppedgif.gif" center 
+    ```
 
 ## Troubleshooting
 
