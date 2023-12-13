@@ -69,7 +69,7 @@ You can use MakeGIF in two modes: Interactive and Argument mode.
 3. Making the GIF square
 
   ```bash
-  squaregif "originalgif.gif" "outputgif.gif"
+  squaregif "originalgif.gif" "outputgif.gif" [left \| right \| center \| top \| bottom]
   ```
 
 ## Troubleshooting

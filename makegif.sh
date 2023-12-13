@@ -288,35 +288,84 @@ makegif() {
 
 # Function to crop a GIF to be square using FFmpeg
 
+#function squaregif() {
+#	local input_gif=$1
+#	local output_gif=$2
+#
+#	# Check if FFmpeg is installed
+#	if ! command -v ffmpeg &>/dev/null; then
+#		echo "FFmpeg is not installed. Please install FFmpeg to use this script."
+#		return 1
+#	fi
+#
+#	# Get original dimensions using FFmpeg
+#	local dimensions=$(ffmpeg -i "$input_gif" 2>&1 | grep 'Stream #0:0' | grep -Eo '[0-9]+x[0-9]+')
+#	local width=$(echo $dimensions | cut -dx -f1)
+#	local height=$(echo $dimensions | cut -dx -f2)
+#
+#	echo "Original dimensions: $width x $height"
+#
+#	# Determine crop dimensions
+#	local size
+#	if [ "$width" -lt "$height" ]; then
+#		size=$width
+#	else
+#		size=$height
+#	fi
+#
+#	echo "Cropping to dimensions: $size x $size"
+#
+#	# Crop the GIF
+#	ffmpeg -i "$input_gif" -vf "crop=$size:$size" -y "$output_gif"
+#}
+#
+## Usage: crop_gif_square "input.gif" "output.gif"
+
+# Function to crop a GIF to be square using FFmpeg
+
 function squaregif() {
-	local input_gif=$1
-	local output_gif=$2
+    local input_gif=$1
+    local output_gif=$2
+    local crop_side=${3:-center}  # Default to center if no side is specified
 
-	# Check if FFmpeg is installed
-	if ! command -v ffmpeg &>/dev/null; then
-		echo "FFmpeg is not installed. Please install FFmpeg to use this script."
-		return 1
-	fi
+    # Check if FFmpeg is installed
+    if ! command -v ffmpeg &> /dev/null; then
+        echo "FFmpeg is not installed. Please install FFmpeg to use this script."
+        return 1
+    fi
 
-	# Get original dimensions using FFmpeg
-	local dimensions=$(ffmpeg -i "$input_gif" 2>&1 | grep 'Stream #0:0' | grep -Eo '[0-9]+x[0-9]+')
-	local width=$(echo $dimensions | cut -dx -f1)
-	local height=$(echo $dimensions | cut -dx -f2)
+    # Get original dimensions using FFmpeg
+    local dimensions=$(ffmpeg -i "$input_gif" 2>&1 | grep 'Stream #0:0' | grep -Eo '[0-9]+x[0-9]+')
+    local width=$(echo $dimensions | cut -dx -f1)
+    local height=$(echo $dimensions | cut -dx -f2)
 
-	echo "Original dimensions: $width x $height"
+    echo "Original dimensions: $width x $height"
 
-	# Determine crop dimensions
-	local size
-	if [ "$width" -lt "$height" ]; then
-		size=$width
-	else
-		size=$height
-	fi
+    # Determine crop dimensions and offset
+    local size
+    local offset_x=0
+    local offset_y=0
+    if [ "$width" -lt "$height" ]; then
+        size=$width
+        if [[ "$crop_side" == "bottom" ]]; then
+            offset_y=$(($height - $width))
+        elif [[ "$crop_side" == "center" ]]; then
+            offset_y=$((($height - $width) / 2))
+        fi
+    else
+        size=$height
+        if [[ "$crop_side" == "right" ]]; then
+            offset_x=$(($width - $height))
+        elif [[ "$crop_side" == "center" ]]; then
+            offset_x=$((($width - $height) / 2))
+        fi
+    fi
 
-	echo "Cropping to dimensions: $size x $size"
+    echo "Cropping to dimensions: $size x $size with offsets X: $offset_x Y: $offset_y"
 
-	# Crop the GIF
-	ffmpeg -i "$input_gif" -vf "crop=$size:$size" -y "$output_gif"
+    # Crop the GIF
+    ffmpeg -i "$input_gif" -vf "crop=$size:$size:$offset_x:$offset_y" -y "$output_gif"
 }
 
-# Usage: crop_gif_square "input.gif" "output.gif"
+# Usage: crop_gif_square "input.gif" "output.gif" [left|right|top|bottom|center]
+
