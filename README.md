@@ -23,26 +23,6 @@ brew install ffmpeg gifsicle
 1. Download the `makegif.sh` script from this repository.
 2. Source the script inside your .zshrc (I source mine in a separate file for functions - they essentially act just like aliases and are called the same way too).
 
-3. Optionally, make the script executable:
-
-   ```bash
-   chmod +x makegif.sh
-   ```
-
-4. Move the script to a directory in your PATH or create an alias for easy access.
-
-   - Moving to a directory in your PATH:
-
-     ```bash
-     sudo mv makegif.sh /usr/local/bin/makegif
-     ```
-
-   - Creating an alias (add this to your `.zshrc` or `.bashrc`):
-
-     ```bash
-     alias makegif="/path/to/makegif.sh"
-     ```
-
 ## Usage
 
 You can use MakeGIF in two modes: Interactive and Argument mode.
@@ -56,7 +36,7 @@ You can use MakeGIF in two modes: Interactive and Argument mode.
 - **Argument Mode**: Provide details as arguments. Arguments wrapped with "< >" are required. Arguments wrapped with "[ ]" are optional.
 
   ```bash
-  makegif <path_to_source_video> <start_time> <duration> <output_gif> <quality> [width] [fps] [num_colors]
+  makegif <path_to_source_video> <start_time> <duration> <output_gif> <quality> [width] [fps] [num_colors] [remove_black_bars]
   ```
 
 ### Parameters
@@ -69,6 +49,8 @@ You can use MakeGIF in two modes: Interactive and Argument mode.
 - `width`: Width of the output GIF (default: 640).
 - `fps`: Frames per second (default: 10).
 - `num_colors`: Number of colors for optimization (default & max: 256). Setting a lower this to a lower number helps dramatically with file size (GIFs get pretty large). Even using only 64 colors still looks pretty good.
+- `remove_black_bars`: Yes/no boolean dictates whether or not the script attempts to
+  automatically remove the black bars from top and bottom of video.
 
 ## Examples
 
@@ -81,8 +63,14 @@ You can use MakeGIF in two modes: Interactive and Argument mode.
 2. Creating a GIF with specified arguments:
 
    ```bash
-   makegif video.mp4 01:10:05 00:00:10 output.gif high 640 15 128
+   makegif makegif video.mp4 01:10:05 00:00:10 output.gif high 640 15 128
    ```
+
+3. Making the GIF square
+
+  ```bash
+  squaregif "originalgif.gif" "outputgif.gif"
+  ```
 
 ## Troubleshooting
 
